@@ -1,0 +1,39 @@
+pipeline{
+		
+		agent{
+				label{
+						label "slave-1"
+						customWorkspace "/mnt/data"
+						}
+			}
+		
+		stages{
+		
+				stage("folder"){
+				
+						steps{
+								sh "mkdir sky"
+							}
+						}
+						
+				stage("folder1"){
+				
+						steps{
+								dir ('/mnt/sir'){
+								sh "mkdir jon"
+								}
+							}
+						}
+						
+				stage("folder2"){
+				
+						steps{
+								dir ('/mnt/velocity'){
+								sh "mkdir suraj"
+								}
+							}
+						}
+			}
+		}
+		
+		
