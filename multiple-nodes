@@ -1,0 +1,47 @@
+pipeline{
+
+		agent {
+				label{
+						label 'built-in'
+						customWorkspace "/var/lib/jenkins/workspace"
+					}
+				}
+				
+		stages{
+		
+				stage("master"){
+							steps{ 
+									sh "sudo yum install git -y"
+									sh "sudo yum install tree -y"
+								}
+							}
+				
+				stage("slave-1"){
+								agent{
+										label{
+												label "slave-1"
+												customWorkspace "/mnt/data"
+												}
+									}
+								steps{
+										sh "sudo yum install httpd -y"
+										sh "sudo yum install tree -y"
+										sh "sudo systemctl start httpd"
+									}
+								}
+								
+					
+				stage("slave-2"){
+								agent{
+										label{
+												label "slave-2"
+												customWorkspace "/mnt/akash"
+												}
+									}
+								steps{
+										sh "sudo yum install docker -y"
+										sh "sudo yum install tree -y"
+									}
+								}
+			}
+		}
